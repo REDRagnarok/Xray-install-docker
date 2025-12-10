@@ -226,7 +226,7 @@ information() {
     rm -r "$TMP_DIRECTORY"
     echo "removed: $TMP_DIRECTORY"
     echo "You may need to execute a command to remove dependent software: $(pkg_manager del) curl unzip"
-    pkg_manager del curl unzip
+    # pkg_manager del curl unzip
     if [ "$XRAY_RUNNING" -eq '1' ]; then
         rc-service xray start
     else
