@@ -151,10 +151,10 @@ decompression() {
 
 is_it_running() {
     XRAY_RUNNING='0'
-    if [ -n "$(pgrep xray)" ]; then
-        rc-service xray stop
-        XRAY_RUNNING='1'
-    fi
+    # if [ -n "$(pgrep xray)" ]; then
+    #     rc-service xray stop
+    #     XRAY_RUNNING='1'
+    # fi
 }
 
 install_xray() {
@@ -202,37 +202,37 @@ install_startup_service_file() {
 }
 
 information() {
-    # echo 'installed: /usr/local/bin/xray'
-    # echo 'installed: /usr/local/share/xray/geoip.dat'
-    # echo 'installed: /usr/local/share/xray/geosite.dat'
-    # if [ "$CONFDIR" -eq '1' ]; then
-    #     echo 'installed: /usr/local/etc/xray/00_log.json'
-    #     echo 'installed: /usr/local/etc/xray/01_api.json'
-    #     echo 'installed: /usr/local/etc/xray/02_dns.json'
-    #     echo 'installed: /usr/local/etc/xray/03_routing.json'
-    #     echo 'installed: /usr/local/etc/xray/04_policy.json'
-    #     echo 'installed: /usr/local/etc/xray/05_inbounds.json'
-    #     echo 'installed: /usr/local/etc/xray/06_outbounds.json'
-    #     echo 'installed: /usr/local/etc/xray/07_transport.json'
-    #     echo 'installed: /usr/local/etc/xray/08_stats.json'
-    #     echo 'installed: /usr/local/etc/xray/09_reverse.json'
-    # fi
-    # if [ "$LOG" -eq '1' ]; then
-    #     echo 'installed: /var/log/xray/'
-    # fi
-    # if [ "$OPENRC" -eq '1' ]; then
-    #     echo 'installed: /etc/init.d/xray'
-    # fi
+    echo 'installed: /usr/local/bin/xray'
+    echo 'installed: /usr/local/share/xray/geoip.dat'
+    echo 'installed: /usr/local/share/xray/geosite.dat'
+    if [ "$CONFDIR" -eq '1' ]; then
+        echo 'installed: /usr/local/etc/xray/config.json'
+        # echo 'installed: /usr/local/etc/xray/01_api.json'
+        # echo 'installed: /usr/local/etc/xray/02_dns.json'
+        # echo 'installed: /usr/local/etc/xray/03_routing.json'
+        # echo 'installed: /usr/local/etc/xray/04_policy.json'
+        # echo 'installed: /usr/local/etc/xray/05_inbounds.json'
+        # echo 'installed: /usr/local/etc/xray/06_outbounds.json'
+        # echo 'installed: /usr/local/etc/xray/07_transport.json'
+        # echo 'installed: /usr/local/etc/xray/08_stats.json'
+        # echo 'installed: /usr/local/etc/xray/09_reverse.json'
+    fi
+    if [ "$LOG" -eq '1' ]; then
+        echo 'installed: /var/log/xray/'
+    fi
+    if [ "$OPENRC" -eq '1' ]; then
+        echo 'installed: /etc/init.d/xray'
+    fi
     rm -r "$TMP_DIRECTORY"
     echo "removed: $TMP_DIRECTORY"
     echo "You may need to execute a command to remove dependent software: $(pkg_manager del) curl unzip"
     pkg_manager del curl unzip
-    # if [ "$XRAY_RUNNING" -eq '1' ]; then
-    #     rc-service xray start
-    # else
-    #     echo 'Please execute the command: rc-update add xray; rc-service xray start'
-    # fi
-    # echo "info: Xray is installed."
+    if [ "$XRAY_RUNNING" -eq '1' ]; then
+        rc-service xray start
+    else
+        echo 'Please execute the command: rc-update add xray; rc-service xray start'
+    fi
+    echo "info: Xray is installed."
 }
 
 main() {
